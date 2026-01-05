@@ -17,25 +17,24 @@ const CTASection = () => {
                 🎯 Ready to Scale?
               </div>
               <h2 className="text-4xl md:text-5xl font-heading font-bold">
-                Let's Go From{" "}
-                <span className="gradient-text font-mono">0 → 1 → ∞</span>
+                Stop Losing Money
               </h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Book a free discovery call. No billing until you're 99% satisfied with outcomes.
+                Get a "Data Hygiene & Growth Audit" for $2k-5k. No long-term commitment. Stop the bleeding first.
               </p>
             </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="gradient-primary text-white font-semibold text-lg px-8 py-6 shadow-glow hover:shadow-lg transition-all hover-lift"
                 onClick={() => setIsContactFormOpen(true)}
               >
                 <Calendar className="mr-2" size={20} />
-                Schedule Discovery Call
+                Get Your Audit
               </Button>
-              <a href="mailto:hello@zeroonedts.com">
+              <a href="mailto:hello@zeroonedotsai.consulting">
                 <Button size="lg" variant="outline" className="font-semibold text-lg px-8 py-6 border-2 hover:bg-muted/50 transition-all">
                   <Mail className="mr-2" size={20} />
                   Email Us Directly
@@ -67,8 +66,8 @@ const CTASection = () => {
         </div>
       </div>
 
-      <ContactForm 
-        open={isContactFormOpen} 
+      <ContactForm
+        open={isContactFormOpen}
         onOpenChange={setIsContactFormOpen}
         defaultSubject="Schedule Discovery Call"
       />

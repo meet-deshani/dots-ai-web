@@ -1,5 +1,6 @@
+import Logo from "./Logo";
 import { Link } from "react-router-dom";
-import { Linkedin, Github, Youtube, Mail } from "lucide-react";
+import { Linkedin, Github, Youtube, Mail, MessageCircle } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,24 +11,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-primary-light to-secondary flex items-center justify-center shadow-glow">
-                <span className="text-white font-bold text-lg font-mono">01</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-heading font-bold text-lg leading-none">
-                  ZeroOne DOTS.ai
-                </span>
-                <span className="text-xs text-muted-foreground">Outcome-first AI Agents</span>
-              </div>
-            </div>
+            <Logo imgClassName="h-10 w-auto sm:h-12" />
             <p className="text-sm text-muted-foreground leading-relaxed">
               Problem Solving First • Outcome First — Zero Billing<br />
               Data Safeguard First
             </p>
             <div className="flex space-x-3">
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/zeroone-dots-ai-consulting-697357392/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-card hover:bg-primary hover:text-white flex items-center justify-center transition-all hover-lift"
@@ -36,7 +27,7 @@ const Footer = () => {
                 <Linkedin size={18} />
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/zeroone-dots-ai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-card hover:bg-primary hover:text-white flex items-center justify-center transition-all hover-lift"
@@ -45,7 +36,7 @@ const Footer = () => {
                 <Github size={18} />
               </a>
               <a
-                href="https://youtube.com"
+                href="https://www.youtube.com/channel/UCScJvjIwDIX5kIb7m4qLExA"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-card hover:bg-primary hover:text-white flex items-center justify-center transition-all hover-lift"
@@ -121,8 +112,19 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail size={16} />
-                <a href="mailto:hello@zeroonedots.ai" className="hover:text-foreground transition-colors">
-                  hello@zeroonedots.ai
+                <a href="mailto:hello@zeroonedotsai.consulting" className="hover:text-foreground transition-colors">
+                  hello@zeroonedotsai.consulting
+                </a>
+              </li>
+              <li className="flex items-center space-x-2 text-sm text-muted-foreground">
+                <MessageCircle size={16} />
+                <a
+                  href="https://wa.me/918320065658"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground transition-colors"
+                >
+                  +91 83200 65658
                 </a>
               </li>
               <li>

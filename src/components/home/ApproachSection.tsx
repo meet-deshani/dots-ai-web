@@ -9,28 +9,28 @@ const ApproachSection = () => {
   const steps = [
     {
       icon: Search,
-      phase: "0",
-      title: "Discover",
-      description: "Problem RCA, KPI Formation, and AI Agent Blueprinting",
-      deliverables: ["Problem RCA", "KPI Formation", "Agent Design", "Possible Projections"],
+      phase: "1",
+      title: "The Wedge (Audit)",
+      description: "We audit your data hygiene and identify bleed. Low risk, high value blueprint.",
+      deliverables: ["Data Hygiene Score", "Leakage Report", "Growth Roadmap"],
       color: "text-purple-500",
       bgColor: "bg-purple-500/10",
     },
     {
       icon: Hammer,
-      phase: "1",
-      title: "Build",
-      description: "AI Agent MVP built by our PM + Agent Engineering stack",
-      deliverables: ["AI Agent Development", "Data Integration", "Dashboard Automation"],
+      phase: "2",
+      title: "The Build",
+      description: "We deploy custom Self-Analytics Tools. No billing until the dashboard loads correctly.",
+      deliverables: ["Custom Dashboards", "No-SQL Interface", "Real-time Visibility"],
       color: "text-purple-600",
       bgColor: "bg-purple-600/10",
     },
     {
       icon: Rocket,
-      phase: "∞",
-      title: "Scale",
-      description: "LLM-backed real-time analytics, monitoring, and continuous optimization",
-      deliverables: ["Realtime Analytics", "Continuous Improvement", "Self-learning Systems"],
+      phase: "3",
+      title: "The Scale",
+      description: "We use the new visibility to recover margins and speed up operations.",
+      deliverables: ["Margin Recovery", "Churn Reduction", "Revenue Growth"],
       color: "text-teal-500",
       bgColor: "bg-teal-500/10",
     },
@@ -44,11 +44,10 @@ const ApproachSection = () => {
           <div className="text-center mb-16 space-y-4 animate-fade-up">
             <h2 className="text-4xl md:text-5xl font-heading font-bold">
               The ZeroOne{" "}
-              <span className="gradient-text font-mono">0 → 1 → ∞</span>{" "}
-              Approach
+              <span className="gradient-text font-mono">Process Blueprint</span>{" "}
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              From problem clarity to scalable AI Systems — powered by Autonomous Agents.
+              From "Blind Spots" to "Strategic Clarity" in 3 steps.
             </p>
           </div>
 
@@ -118,22 +117,22 @@ const ApproachSection = () => {
 
           {/* CTA */}
           <div className="text-center mt-8 animate-fade-up" style={{ animationDelay: "500ms" }}>
-            <Button 
-              size="lg" 
-              variant="outline" 
+            <Button
+              size="lg"
+              variant="outline"
               className="font-semibold"
               onClick={() => setIsContactFormOpen(true)}
             >
-              Start Your AI Agent Journey
+              Get Your Blueprint
             </Button>
           </div>
         </div>
       </div>
 
-      <ContactForm 
-        open={isContactFormOpen} 
+      <ContactForm
+        open={isContactFormOpen}
         onOpenChange={setIsContactFormOpen}
-        defaultSubject="Start AI Agent Project"
+        defaultSubject="Get Process Blueprint"
       />
     </section>
   );

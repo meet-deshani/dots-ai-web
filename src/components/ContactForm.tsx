@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,11 +7,14 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { MessageCircle, CheckCircle2 } from "lucide-react";
+import { notifyFormSubmission, notifyFormAbandonment, notifyFormOpened } from "@/lib/telegram";
 
 interface ContactFormProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   defaultSubject?: string;
+  messagePlaceholder?: string;
+  messageLabel?: string;
 }
 
 const contactSchema = z.object({
@@ -24,7 +27,13 @@ const contactSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
-const ContactForm = ({ open, onOpenChange, defaultSubject = "Launch My Agent" }: ContactFormProps) => {
+const ContactForm = ({
+  open,
+  onOpenChange,
+  defaultSubject = "Launch My Agent",
+  messagePlaceholder = "Describe your challenge...",
+  messageLabel = "Tell us about your challenge *"
+}: ContactFormProps) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
@@ -36,6 +45,23 @@ const ContactForm = ({ open, onOpenChange, defaultSubject = "Launch My Agent" }:
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
+
+  // Tracking for form abandonment
+  const formOpenedAt = useRef<number | null>(null);
+  const hasNotifiedOpened = useRef(false);
+
+  // Track when form opens
+  useEffect(() => {
+    if (open && !hasNotifiedOpened.current) {
+      formOpenedAt.current = Date.now();
+      hasNotifiedOpened.current = true;
+      // Notify form opened
+      notifyFormOpened(window.location.pathname);
+    }
+    if (!open) {
+      hasNotifiedOpened.current = false;
+    }
+  }, [open]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,6 +90,9 @@ const ContactForm = ({ open, onOpenChange, defaultSubject = "Launch My Agent" }:
         }
       );
 
+      // Send Telegram notification for form submission
+      await notifyFormSubmission(validatedData, window.location.pathname);
+
       toast({
         title: "Request Submitted!",
         description: "We'll get back to you within 24 hours.",
@@ -71,6 +100,7 @@ const ContactForm = ({ open, onOpenChange, defaultSubject = "Launch My Agent" }:
 
       // Show success state with WhatsApp button
       setIsSubmitted(true);
+      formOpenedAt.current = null; // Reset tracking
     } catch (error) {
       if (error instanceof z.ZodError) {
         // Handle validation errors
@@ -98,7 +128,30 @@ const ContactForm = ({ open, onOpenChange, defaultSubject = "Launch My Agent" }:
     }
   };
 
+  useEffect(() => {
+    if (!open) return;
+    setFormData((prev) => ({
+      ...prev,
+      subject: defaultSubject,
+    }));
+  }, [defaultSubject, open]);
+
   const handleClose = () => {
+    // Check for form abandonment (only if form was opened and not submitted)
+    if (!isSubmitted && formOpenedAt.current) {
+      const filledFields: string[] = [];
+      if (formData.name.trim()) filledFields.push('Name');
+      if (formData.email.trim()) filledFields.push('Email');
+      if (formData.company?.trim()) filledFields.push('Company');
+      if (formData.message.trim()) filledFields.push('Message');
+
+      const timeInFormSeconds = Math.floor((Date.now() - formOpenedAt.current) / 1000);
+
+      // Notify about abandonment
+      notifyFormAbandonment(filledFields, window.location.pathname, timeInFormSeconds);
+    }
+
+    // Reset state
     setIsSubmitted(false);
     setFormData({
       name: "",
@@ -108,11 +161,12 @@ const ContactForm = ({ open, onOpenChange, defaultSubject = "Launch My Agent" }:
       message: "",
     });
     setErrors({});
+    formOpenedAt.current = null;
     onOpenChange(false);
   };
 
   const handleWhatsAppClick = () => {
-    const whatsappUrl = `https://wa.me/917567838028?text=${encodeURIComponent("Hi! I just submitted a form on ZeroOne DOTS.ai")}`;
+    const whatsappUrl = `https://wa.me/918320065658?text=${encodeURIComponent("Hi! I just submitted a form on ZeroOne DOTS.ai")}`;
     window.open(whatsappUrl, "_blank");
     handleClose();
   };
@@ -163,63 +217,63 @@ const ContactForm = ({ open, onOpenChange, defaultSubject = "Launch My Agent" }:
               </DialogDescription>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Label htmlFor="name">Name *</Label>
-            <Input
-              id="name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder="Your name"
-              className={errors.name ? "border-destructive" : ""}
-            />
-            {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
-          </div>
-          <div>
-            <Label htmlFor="email">Email *</Label>
-            <Input
-              id="email"
-              type="email"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              placeholder="your@company.com"
-              className={errors.email ? "border-destructive" : ""}
-            />
-            {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
-          </div>
-          <div>
-            <Label htmlFor="company">Company</Label>
-            <Input
-              id="company"
-              value={formData.company}
-              onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-              placeholder="Your company name"
-              className={errors.company ? "border-destructive" : ""}
-            />
-            {errors.company && <p className="text-sm text-destructive mt-1">{errors.company}</p>}
-          </div>
-          <div>
-            <Label htmlFor="subject">Subject *</Label>
-            <Input
-              id="subject"
-              value={formData.subject}
-              onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-              placeholder="What do you need help with?"
-              className={errors.subject ? "border-destructive" : ""}
-            />
-            {errors.subject && <p className="text-sm text-destructive mt-1">{errors.subject}</p>}
-          </div>
-          <div>
-            <Label htmlFor="message">Tell us about your challenge *</Label>
-            <Textarea
-              id="message"
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              placeholder="Describe your challenge..."
-              rows={4}
-              className={errors.message ? "border-destructive" : ""}
-            />
-            {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
-          </div>
+              <div>
+                <Label htmlFor="name">Name *</Label>
+                <Input
+                  id="name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  placeholder="Dhaval P"
+                  className={errors.name ? "border-destructive" : ""}
+                />
+                {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
+              </div>
+              <div>
+                <Label htmlFor="email">Email *</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="your@company.com"
+                  className={errors.email ? "border-destructive" : ""}
+                />
+                {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
+              </div>
+              <div>
+                <Label htmlFor="company">Company</Label>
+                <Input
+                  id="company"
+                  value={formData.company}
+                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                  placeholder="Your company name"
+                  className={errors.company ? "border-destructive" : ""}
+                />
+                {errors.company && <p className="text-sm text-destructive mt-1">{errors.company}</p>}
+              </div>
+              <div>
+                <Label htmlFor="subject">Subject *</Label>
+                <Input
+                  id="subject"
+                  value={formData.subject}
+                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                  placeholder="What do you need help with?"
+                  className={errors.subject ? "border-destructive" : ""}
+                />
+                {errors.subject && <p className="text-sm text-destructive mt-1">{errors.subject}</p>}
+              </div>
+              <div>
+                <Label htmlFor="message">{messageLabel}</Label>
+                <Textarea
+                  id="message"
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  placeholder={messagePlaceholder}
+                  rows={4}
+                  className={errors.message ? "border-destructive" : ""}
+                />
+                {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
+              </div>
               <Button type="submit" className="w-full gradient-primary text-white" disabled={isSubmitting}>
                 {isSubmitting ? "Submitting..." : "Submit Request"}
               </Button>

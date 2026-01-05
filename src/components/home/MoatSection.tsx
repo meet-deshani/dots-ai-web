@@ -17,7 +17,7 @@ const MoatSection = () => {
     {
       icon: Shield,
       title: "Data Safeguard First",
-      description: "Minimal PII, encryption in transit/at rest, least-privilege IAM, full audit.",
+      description: "We use No-SQL, Voice-to-Data, and Secured Dashboards to give you vision.",
       gradient: "from-secondary to-primary",
     },
   ];

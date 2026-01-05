@@ -8,44 +8,44 @@ const CaseStudiesSection = () => {
 
   const caseStudies = [
     {
-      title: "💰 FinTech SaaS",
-      industry: "FinTech SaaS",
-      problem: "Manual MIS and reconciliation took 40+ hours/month with recurring data mismatches.",
-      agentDeployed: "🧠 Data Pipeline Agent",
-      agentDescription: "Connected across CRM, Billing, and MIS tools to auto-reconcile, validate, and generate dashboards in real time.",
-      howItWorked: "Agent auto-detected mismatched entries, flagged anomalies to Slack, and triggered re-runs using internal logic.",
-      outcome: "✅ 100% automation, <1% reconciliation error, 25% faster CXO decision cycles.",
+      title: "⚖️ Personal Injury Law",
+      industry: "Legal Tech",
+      problem: "Revenue Leakage from Missed Intake. Potential high-value clients calling after hours were lost to competitors.",
+      agentDeployed: "📞 24/7 AI Voice Intake & Discovery Engine",
+      agentDescription: "A voice agent that captures leads instantly and a semantic document reviewer that flags critical case evidence.",
+      howItWorked: "Client used Type, Speak, or Drag-and-Drop to interact with the data, requiring zero technical knowledge.",
+      outcome: "✅ 5x ROI via Captured Leads. 40% reduction in associate review time. Strategic Shift from 'IT housekeeping' to direct revenue capture.",
       metrics: [
-        { label: "40 hrs/mo saved", icon: "⏱️" },
-        { label: "<1% error", icon: "📉" },
-        { label: "25% faster decisions", icon: "⚡" },
+        { label: "5x ROI", icon: "💰" },
+        { label: "40% less review time", icon: "⏱️" },
+        { label: "35% conversion lift", icon: "📈" },
       ],
     },
     {
-      title: "🚚 Logistics Startup",
-      industry: "Logistics Startup",
-      problem: "Field operations lacked visibility; no clarity on which zones were underperforming.",
-      agentDeployed: "📍 Ops Tracking Agent + CXO Dashboard Agent",
-      agentDescription: "Built tracking and visibility system for field operations.",
-      howItWorked: "Agent fetched GPS pings and ticket logs, flagged inactive routes, and pushed weekly summary to WhatsApp via API integration.",
-      outcome: "🚀 30% productivity boost, 2-day reduction in TAT, ₹8L/year cost savings.",
+      title: "🚛 3PL Logistics & Supply Chain",
+      industry: "Logistics",
+      problem: "Margin Erosion via Manual Oversight. Invoice discrepancies were delaying payments and 'Where is my truck?' inquiries overwhelmed staff.",
+      agentDeployed: "🚚 OCR Invoice Matcher + Predictive ETA Agent",
+      agentDescription: "Automated matching of POs to Invoices with 99% accuracy and predictive route flagging pushed to WhatsApp.",
+      howItWorked: "Client used Type, Speak, or Drag-and-Drop to interact with the data, requiring zero technical knowledge.",
+      outcome: "✅ 70% Reduction in Processing Costs. 50% faster invoicing cycles. Strategic Shift from 'visibility' to cash flow acceleration.",
       metrics: [
-        { label: "30% productivity boost", icon: "📈" },
-        { label: "2-day TAT reduction", icon: "⚡" },
-        { label: "₹8L/year saved", icon: "💰" },
+        { label: "70% cost reduction", icon: "📉" },
+        { label: "50% faster invoicing", icon: "⚡" },
+        { label: "8L/year saved", icon: "💰" },
       ],
     },
     {
       title: "🛒 D2C E-Commerce",
       industry: "D2C E-Commerce",
-      problem: "Burning cash due to unclear P&L structure and inefficient ad spend.",
-      agentDeployed: "📈 Financial Insight Agent",
-      agentDescription: "Linked Shopify + Ad Manager + Inventory APIs to simulate real-time P&L models.",
-      howItWorked: "Agent autonomously adjusted budget allocations based on ROI patterns.",
-      outcome: "💡 ₹12L annual savings, 15% higher gross margins, ROI achieved within 3 months.",
+      problem: "P&L Destruction via RTO & Ad Fatigue. High Return-to-Origin (RTO) rates were eating 15% of gross margins.",
+      agentDeployed: "📦 Predictive RTO Guard & Creative Velocity Agent",
+      agentDescription: "Analyzes customer profiles to flag high-RTO risks before shipping and generates 10x the ad creative volume.",
+      howItWorked: "Client used Type, Speak, or Drag-and-Drop to interact with the data, requiring zero technical knowledge.",
+      outcome: "✅ 15% Recovery of Lost Margins. 20% Increase in ROAS. Strategic Shift from 'unclear P&L' to active margin protection.",
       metrics: [
-        { label: "₹12L annual savings", icon: "💰" },
-        { label: "15% higher margins", icon: "📊" },
+        { label: "15% margin recovery", icon: "💰" },
+        { label: "20% ROAS increase", icon: "📈" },
         { label: "3-month ROI", icon: "⚡" },
       ],
     },
@@ -58,10 +58,10 @@ const CaseStudiesSection = () => {
           {/* Section Header */}
           <div className="text-center mb-16 space-y-4 animate-fade-up">
             <h2 className="text-4xl md:text-5xl font-heading font-bold">
-              Proof of <span className="gradient-text">Intelligence in Action</span>
+              Trust <span className="gradient-text">Architecture</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Real AI Agent deployments. Real transformation. Real outcomes.
+              Permissionless Portfolio. See how we solved boring but expensive problems for others.
             </p>
           </div>
 
@@ -78,27 +78,27 @@ const CaseStudiesSection = () => {
                   <h3 className="font-heading text-2xl font-bold mb-4 text-center">
                     {study.title}
                   </h3>
-                  
+
                   <div className="space-y-4 text-sm">
                     {/* Problem */}
                     <div className="border-l-2 border-destructive pl-3">
                       <p className="font-semibold text-destructive mb-1 uppercase text-xs tracking-wide">Problem</p>
                       <p className="text-muted-foreground leading-relaxed">{study.problem}</p>
                     </div>
-                    
+
                     {/* AI Agent Deployed */}
                     <div className="border-l-2 border-primary pl-3">
                       <p className="font-semibold text-primary mb-1 uppercase text-xs tracking-wide">AI Agent Deployed</p>
                       <p className="text-foreground font-semibold">{study.agentDeployed}</p>
                       <p className="text-muted-foreground text-xs mt-1 leading-relaxed">{study.agentDescription}</p>
                     </div>
-                    
+
                     {/* How It Worked */}
                     <div className="border-l-2 border-primary-light pl-3">
                       <p className="font-semibold text-primary-light mb-1 uppercase text-xs tracking-wide">How It Worked</p>
                       <p className="text-muted-foreground leading-relaxed">{study.howItWorked}</p>
                     </div>
-                    
+
                     {/* Outcome */}
                     <div className="bg-gradient-to-br from-primary/10 to-primary-light/10 border border-primary/20 rounded-lg p-3">
                       <p className="font-semibold text-primary mb-2 uppercase text-xs tracking-wide flex items-center gap-1">
@@ -107,7 +107,7 @@ const CaseStudiesSection = () => {
                       </p>
                       <p className="text-foreground font-medium leading-relaxed">{study.outcome}</p>
                     </div>
-                    
+
                     {/* Metrics */}
                     <div className="grid grid-cols-1 gap-2 pt-2">
                       {study.metrics.map((metric, idx) => (
@@ -117,11 +117,11 @@ const CaseStudiesSection = () => {
                         </div>
                       ))}
                     </div>
-                    
+
                     {/* Footer note */}
                     <div className="pt-3 border-t border-border">
                       <p className="text-xs text-muted-foreground italic text-center">
-                        Deployed Inside Client Platform
+                        Deployed Custom Analytics Tool
                       </p>
                     </div>
                   </div>
@@ -135,19 +135,19 @@ const CaseStudiesSection = () => {
             <p className="text-sm text-muted-foreground">
               Powered by ZeroOne DOTS.ai Agents – seamlessly embedded in client environments
             </p>
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="gradient-primary text-white font-semibold shadow-glow"
               onClick={() => setIsContactFormOpen(true)}
             >
-              Launch My Agent
+              View Full Portfolio
             </Button>
           </div>
         </div>
       </div>
-      
-      <ContactForm 
-        open={isContactFormOpen} 
+
+      <ContactForm
+        open={isContactFormOpen}
         onOpenChange={setIsContactFormOpen}
         defaultSubject="Launch My Agent"
       />

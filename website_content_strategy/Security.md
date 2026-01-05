@@ -1,3 +1,8 @@
+# Page: Security
+**Route**: `/security`
+
+## Content Source
+```tsx
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -329,3 +334,4 @@ const Security = () => {
 };
 
 export default Security;
+```

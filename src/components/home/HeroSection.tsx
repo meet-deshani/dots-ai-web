@@ -12,23 +12,16 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src={heroBg} 
-          alt="Hero background" 
+        <img
+          src={heroBg}
+          alt="Hero background"
           className="w-full h-full object-cover opacity-30"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-background/90" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.1),transparent_50%)]" />
       </div>
 
-      {/* Strapline bar */}
-      <div className="absolute top-20 left-0 right-0 z-10 bg-primary/5 border-y border-primary/10 py-2">
-        <div className="container mx-auto px-4">
-          <p className="text-center text-sm font-medium text-primary">
-            Problem Solving First • Outcome First — Zero Billing • Data Safeguard First
-          </p>
-        </div>
-      </div>
+
 
       {/* Content */}
       <div className="container mx-auto px-4 z-10">
@@ -37,21 +30,22 @@ const HeroSection = () => {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-primary/20 shadow-glow">
             <Shield className="text-primary" size={16} />
             <span className="text-sm font-semibold gradient-text">
-              Outcome First — Zero Billing
+              Pay Only for Outcomes
             </span>
           </div>
 
           {/* Main Headline */}
           <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight">
-            <span className="gradient-text">Outcome-first AI Agents</span>
+            <span className="text-foreground">We help Business / Brands</span>
             <br />
-            <span className="text-foreground">for Data, Ops, Tech & Strategy</span>
+            <span className="gradient-text">recover 13% in lost margins</span>
+            <br />
+            <span className="text-foreground">through AI-Driven Analytics.</span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Zero Billing until outcomes. Problem-Solving &gt; Billable Hours. 
-            Bank-grade Data Safeguards.
+            Stop flying blind. See where you are losing money, shipping slowly, or churning clients. We build custom <span className="text-foreground font-semibold">Self-Analytics Tools</span> that fix expensive problems.
           </p>
 
           {/* Proof strip */}
@@ -84,24 +78,24 @@ const HeroSection = () => {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="gradient-primary text-white font-semibold text-lg px-8 shadow-glow hover:scale-105 transition-transform"
               onClick={() => setIsContactFormOpen(true)}
             >
-              Launch My Agent
+              Get Your Data Hygiene & Growth Audit
               <ArrowRight className="ml-2" size={20} />
             </Button>
             <Link to="/work">
               <Button size="lg" variant="outline" className="font-semibold text-lg px-8 hover:bg-primary/5">
-                See Live Demos
+                See Permissionless Portfolio
               </Button>
             </Link>
           </div>
 
           {/* Microcopy */}
           <p className="text-sm text-muted-foreground max-w-2xl mx-auto pt-8 leading-relaxed">
-            We design, deploy, and maintain custom AI agents that drive real business growth 
+            We design, deploy, and maintain custom AI agents that drive real business growth
             and plug into your existing tools.
           </p>
         </div>
@@ -114,10 +108,10 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <ContactForm 
-        open={isContactFormOpen} 
+      <ContactForm
+        open={isContactFormOpen}
         onOpenChange={setIsContactFormOpen}
-        defaultSubject="Launch My Agent"
+        defaultSubject="Data Hygiene & Growth Audit"
       />
     </section>
   );
